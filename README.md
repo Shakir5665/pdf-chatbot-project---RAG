@@ -1,10 +1,14 @@
 # 📚 PDF Insight: AI-Powered Document Intelligence
 A professional, Retrieval-Augmented Generation (RAG) powered chatbot built to supercharge document analysis. This application allows users to seamlessly converse with their PDF documents, retrieving hyper-accurate data using OpenAI's state-of-the-art embedding and inference models.
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Access_Here-green?style=for-the-badge)](https://pdf-chatbot-project---rag-application-demo.streamlit.app/)
+**🔗 [Click Here to View the Live Demo](https://pdf-chatbot-project---rag-application-demo.streamlit.app/)**
+
 ---
 
-> ⚠️ **Important Note on OpenAI API Quotas:**
-> Please be aware that OpenAI's free-tier API quotas are often insufficient for data-heavy tasks such as document embedding, and frequently trigger `insufficient_quota` or `429` errors. **To run this sophisticated application flawlessly, you must have a funded OpenAI Developer account with an active billing method linked.**
+> ⚠️ **Important Note on OpenAI API Usage:**
+> Please be aware that **OpenAI's old free-tier API credit program has officially ended**, and typical free accounts will not work. Attempting to use a standard unbilled account will result in `insufficient_quota` or `429` errors. 
+> **To run this sophisticated application flawlessly locally or on the web, you must have a funded OpenAI Developer account with an active billing method linked.**
 
 ---
 
