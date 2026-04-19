@@ -21,7 +21,12 @@ class Config:
     MAX_OUTPUT_TOKENS = 500
     
     # API Keys
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    # Try to load from Streamlit Secrets first (for deployment), then fallback to local .env
+    try:
+        import streamlit as st
+        OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
+    except Exception:
+        OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     
     # File Paths
     VECTOR_STORE_PATH = "./vector_store"
