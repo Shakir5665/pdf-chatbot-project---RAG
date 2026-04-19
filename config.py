@@ -4,12 +4,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    # Google Gemini Configuration
-    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
     
-    if not GOOGLE_API_KEY:
-        raise ValueError("GOOGLE_API_KEY not found in .env file")
-    
+
     # PDF Processing
     CHUNK_SIZE = 1000
     CHUNK_OVERLAP = 200
