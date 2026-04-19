@@ -1,22 +1,22 @@
-# Quick test to verify everything works with Gemini
+# Quick test to verify everything works with OpenAI
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
 # Test 1: Check API key
-api_key = os.getenv("GOOGLE_API_KEY")
+api_key = os.getenv("OPENAI_API_KEY")
 if api_key:
-    print("✅ Google Gemini API key found")
+    print("✅ OpenAI API key found")
 else:
     print("❌ API key missing - check .env file")
 
-# Test 2: Try importing Gemini libraries
+# Test 2: Try importing OpenAI libraries
 try:
-    from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
-    print("✅ LangChain Google GenAI package installed")
+    from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+    print("✅ LangChain OpenAI package installed")
 except ImportError as e:
-    print(f"❌ LangChain Google package missing: {e}")
+    print(f"❌ LangChain OpenAI package missing: {e}")
 
 try:
     import streamlit

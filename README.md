@@ -1,26 +1,26 @@
 # 📚 PDF Chatbot - RAG Architecture
 
-An intelligent, Retrieval-Augmented Generation (RAG) powered Chatbot that allows users to seamlessly converse with their PDF documents. The application is built using Python, Streamlit, LangChain, FAISS, and Google Gemini models.
+An intelligent, Retrieval-Augmented Generation (RAG) powered Chatbot that allows users to seamlessly converse with their PDF documents. The application is built using Python, Streamlit, LangChain, FAISS, and OpenAI models.
 
 ## ✨ Features
 - **PDF Ingestion & Processing**: Easily upload your PDF documents through a clean Streamlit interface.
 - **Smart Chunking**: Automatically processes and splits documents into optimized text chunks using `RecursiveCharacterTextSplitter`.
 - **Local Vector Search (FAISS)**: Uses FAISS to index and rapidly retrieve relevant document chunks based on semantic similarity without relying on external cloud vector databases.
-- **Google Gemini Integration**: 
-  - Embeddings generated using Google's `gemini-embedding-001`.
-  - Accurate, context-aware conversational answers powered by `gemini-2.0-flash`.
+- **OpenAI Integration**: 
+  - Embeddings generated using OpenAI's `text-embedding-3-small`.
+  - Accurate, context-aware conversational answers powered by `gpt-3.5-turbo`.
 - **Source Citation**: Transparently displays exact snippets and pages where the answers were derived from to ensure hallucination-free interactions.
 
 ## 🛠️ Tech Stack
 - **User Interface**: [Streamlit](https://streamlit.io/)
 - **LLM Orchestration**: [LangChain](https://www.langchain.com/)
-- **LLM & Embeddings Provider**: [Google Gemini](https://ai.google.dev/)
+- **LLM & Embeddings Provider**: [OpenAI](https://openai.com/)
 - **Vector Store**: [FAISS CPU](https://github.com/facebookresearch/faiss)
 - **PDF Parser**: `pypdf`
 
 ## 📂 Project Structure
 ```text
-├── .env                   # Environment variables (requires GOOGLE_API_KEY)
+├── .env                   # Environment variables (requires OPENAI_API_KEY)
 ├── app.py                 # Streamlit UI layout and main application logic
 ├── chatbot.py             # Chatbot module defining the Retrieval QA chain
 ├── config.py              # Application settings, LLM mapping, and constants
@@ -33,7 +33,7 @@ An intelligent, Retrieval-Augmented Generation (RAG) powered Chatbot that allows
 
 ### Prerequisites
 - **Python 3.8+**
-- **Google API Key**: Needed for embeddings and LLM generation. Get yours from [Google AI Studio](https://aistudio.google.com/app/apikey).
+- **OpenAI API Key**: Needed for embeddings and LLM generation. Get yours from [OpenAI Platform](https://platform.openai.com/api-keys).
 
 ### Installation
 1. **Navigate to the project directory**:
@@ -58,7 +58,7 @@ An intelligent, Retrieval-Augmented Generation (RAG) powered Chatbot that allows
 4. **Configure Environment Variables**:
    Create a `.env` file in the root directory (if not already existing) and add your API key:
    ```env
-   GOOGLE_API_KEY=your_api_key_here
+   OPENAI_API_KEY=your_api_key_here
    ```
 
 ### Usage
@@ -73,7 +73,7 @@ System behaviors, hyperparameters, and models can be easily tweaked inside `conf
 - **CHUNK_SIZE**: `1000` (Size of the parsed text splits)
 - **CHUNK_OVERLAP**: `200` (Sliding overlap to prevent losing sentence contexts)
 - **RETRIEVAL_K**: `4` (Number of document matches fetched to frame the answer)
-- **CHAT_MODEL**: Switch the core reasoning engine (`gemini-2.0-flash` by default).
+- **CHAT_MODEL**: Switch the core reasoning engine (`gpt-3.5-turbo` by default).
 
 *Note: The application automatically creates `./uploads` and `./vector_store` fallback directories contextually to process data streams.*
 
@@ -96,9 +96,9 @@ The easiest way to showcase and deploy this application is using **Streamlit Com
 
 4. **Add your API Key Securely**:
    - **Crucial step**: Before hitting deploy, click on "**Advanced settings...**".
-   - Look for the **Secrets** section. Add your `GOOGLE_API_KEY` here (similar to the `.env` format):
+   - Look for the **Secrets** section. Add your `OPENAI_API_KEY` here (similar to the `.env` format):
      ```toml
-     GOOGLE_API_KEY="your_actual_api_key_here"
+     OPENAI_API_KEY="your_actual_api_key_here"
      ```
    - Click "**Save**".
 

@@ -1,4 +1,4 @@
-from langchain_google_genai import ChatGoogleGenerativeAI  # ← CHANGED
+from langchain_openai import ChatOpenAI  # ← CHANGED
 from langchain_classic.chains import RetrievalQA
 from langchain_core.prompts import PromptTemplate
 from langchain_community.vectorstores import FAISS
@@ -7,16 +7,15 @@ from config import Config
 
 class PDFChatbot:
     def __init__(self, vector_store: FAISS):
-        """Initialize chatbot with Gemini LLM"""
+        """Initialize chatbot with OpenAI LLM"""
         self.vector_store = vector_store
         
-        # ← CHANGED: Initialize Gemini instead of OpenAI
-        self.llm = ChatGoogleGenerativeAI(
+        # ← CHANGED: Initialize OpenAI instead of Gemini
+        self.llm = ChatOpenAI(
             model=Config.CHAT_MODEL,
-            google_api_key=Config.GOOGLE_API_KEY,
+            api_key=Config.OPENAI_API_KEY,
             temperature=Config.TEMPERATURE,
-            max_output_tokens=Config.MAX_OUTPUT_TOKENS,
-            convert_system_message_to_human=True  # Required for Gemini
+            max_tokens=Config.MAX_OUTPUT_TOKENS
         )
         
         # Custom prompt template (same as before)

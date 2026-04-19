@@ -3,7 +3,7 @@ import os
 from typing import List, Tuple
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
 import streamlit as st
@@ -11,13 +11,11 @@ from config import Config
 
 class PDFIngestor:
     def __init__(self):
-        """Initialize the PDF ingestor with Gemini embeddings"""
+        """Initialize the PDF ingestor with OpenAI embeddings"""
         try:
-            # ← FIXED: Use correct embedding model with error handling
-            self.embeddings = GoogleGenerativeAIEmbeddings(
+            self.embeddings = OpenAIEmbeddings(
                 model=Config.EMBEDDING_MODEL,
-                google_api_key=Config.GOOGLE_API_KEY,
-                task_type="retrieval_document"  # Optimize for RAG
+                openai_api_key=Config.OPENAI_API_KEY,
             )
             st.success(f"✅ Using embedding model: {Config.EMBEDDING_MODEL}")
         except Exception as e:
@@ -55,7 +53,7 @@ class PDFIngestor:
     def create_vector_store(self, chunks: List[Document], filename: str) -> FAISS:
         """Create FAISS vector store from document chunks"""
         try:
-            # Create vector store with Gemini embeddings
+            # Create vector store with OpenAI embeddings
             with st.spinner("Generating embeddings (this may take a moment)..."):
                 vector_store = FAISS.from_documents(chunks, self.embeddings)
             
@@ -93,7 +91,7 @@ class PDFIngestor:
         with st.spinner("✂️  Splitting into chunks..."):
             chunks = self.chunk_documents(documents)
         
-        with st.spinner("🔢 Creating vector database with Gemini embeddings..."):
+        with st.spinner("🔢 Creating vector database with OpenAI embeddings..."):
             vector_store = self.create_vector_store(chunks, os.path.basename(pdf_path))
         
         return vector_store, chunks

@@ -109,7 +109,7 @@ with st.sidebar:
         5. **Generate Answer** - GPT answers based on those chunks
         """)
     
-    st.caption(f"🟢 System Ready | Model: {Config.CHAT_MODEL} (Gemini)")
+    st.caption(f"🟢 System Ready | Model: {Config.CHAT_MODEL} (OpenAI)")
 
 # Main chat interface
 if not st.session_state.processing_complete:
