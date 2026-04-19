@@ -21,12 +21,17 @@ class Config:
     MAX_OUTPUT_TOKENS = 500
     
     # API Keys
-    # Try to load from Streamlit Secrets first (for deployment), then fallback to local .env
     try:
         import streamlit as st
-        OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
+        _api_key = st.secrets.get("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
     except Exception:
-        OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+        _api_key = os.getenv("OPENAI_API_KEY")
+        
+    OPENAI_API_KEY = _api_key
+    
+    # Force set it in the environment variable so Langchain finds it automatically
+    if OPENAI_API_KEY:
+        os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
     
     # File Paths
     VECTOR_STORE_PATH = "./vector_store"

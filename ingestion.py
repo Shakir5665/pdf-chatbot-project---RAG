@@ -15,7 +15,7 @@ class PDFIngestor:
         try:
             self.embeddings = OpenAIEmbeddings(
                 model=Config.EMBEDDING_MODEL,
-                openai_api_key=Config.OPENAI_API_KEY,
+                api_key=Config.OPENAI_API_KEY,
             )
             st.success(f"✅ Using embedding model: {Config.EMBEDDING_MODEL}")
         except Exception as e:
